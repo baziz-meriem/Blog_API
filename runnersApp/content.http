@@ -1,0 +1,28 @@
+###
+GET http://localhost:8080/api/content
+
+<> 2024-08-30T091545.200.json
+
+###
+GET http://localhost:8080/api/content
+Content-Type: application/json
+
+<> 2024-08-30T102648.200.json
+<> 2024-08-30T092931.200.json
+
+###
+POST http://localhost:8080/api/content
+Content-Type: application/json
+
+{
+  "id": 2,
+  "title": "My Second Recipe",
+  "desc": "This is the 2nd recipe description",
+  "status": "IDEA",
+  "contentType": "ARTICLE",
+  "dateCreated": "2024-08-30T11:24:19.4698425",
+  "dateUpdated": null,
+  "url": ""
+}
+
+<> 2024-08-30T102617.200.json
