@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class ContentCollectionRepository {
+
+public class ContentCollectionRepository  {
     private final List<Content> contentList = new ArrayList<>();
 
     public ContentCollectionRepository() {
@@ -36,7 +36,7 @@ public class ContentCollectionRepository {
 
 
     public Optional<Content> findById(Integer id) {
-        return contentList.stream().filter(c -> c.id().equals(id)).findFirst();
+        return contentList.stream().filter(c -> c.getId().equals(id)).findFirst();
     }
 
 
@@ -44,6 +44,7 @@ public class ContentCollectionRepository {
     private void init() {
         Content c = new Content(
                 1,
+                0,
                 "My First Recipe",
                 "This is the recipe description",
                 Status.IDEA,
