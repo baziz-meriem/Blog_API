@@ -1,0 +1,38 @@
+### Get all users
+GET http://localhost:8081/user
+Accept: application/json
+
+### Get user by ID
+GET http://localhost:8081/user/1
+Accept: application/json
+
+### Create new user
+POST http://localhost:8081/user
+Content-Type: application/json
+
+{
+  "email": "newuser@example.com",
+  "role": "USER",
+  "password": "password",
+  "email": "user2@example.com",
+  "resetPasswordToken": "resetToken",
+  "isEmailVerified": true,
+  "verificationToken": "verificationToken"
+}
+
+### Update user
+PUT http://localhost:8081/user/2
+Content-Type: application/json
+
+{
+  "email": "updateduser@example.com",
+  "role": "ADMIN",
+  "password": "newpassword",
+  "email": "user2@example.com",
+  "resetPasswordToken": "newResetToken",
+  "isEmailVerified": false,
+  "verificationToken": "newVerificationToken"
+}
+
+### Delete user
+DELETE http://localhost:8081/user/4

@@ -27,22 +27,23 @@ public class RunnersAppApplication {
 		SpringApplication.run(RunnersAppApplication.class, args);
 	}
 
-	@Bean
-	CommandLineRunner commandLineRunner(UserRepo repository) {
-		return args -> {
-
-				var user = new User(
-						null,
-						"jm_baziz@esi.dz",
-						"password",
-						"resetPasswordToken",
-						true,
-						"verificationToken");
-
-				repository.save(user);
-				log.info("User Created: " + user.toString());
-			};
-		};
+//	@Bean
+//	CommandLineRunner commandLineRunner(UserRepo repository) {
+//		return args -> {
+//
+//				var user = new User(
+//						0,
+//						"jm_baziz@esi.dz",
+//						"ADMIN",
+//						"password",
+//						"resetPasswordToken",
+//						true,
+//						"verificationToken");
+//
+//				repository.save(user);
+//				log.info("User Created: " + user.toString());
+//			};
+//		};
 	}
 
 

@@ -11,6 +11,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotBlank(message = "Role is mandatory")
+    private String role;
 
     @NotBlank(message = "Email is mandatory")
     @Email(message = "Email should be valid")
@@ -28,8 +30,9 @@ public class User {
     }
 
     // Constructor with all fields
-    public User(Integer id, String email, String password, String resetPasswordToken, boolean isEmailVerified, String verificationToken) {
+    public User(Integer id, String email,String role, String password, String resetPasswordToken, boolean isEmailVerified, String verificationToken) {
         this.id = id;
+        this.role = role;
         this.email = email;
         this.password = password;
         this.resetPasswordToken = resetPasswordToken;
@@ -45,6 +48,9 @@ public class User {
     public void setId(Integer id) {
         this.id = id;
     }
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getEmail() {
         return email;
@@ -53,7 +59,9 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    public String getRole(){
+      return role;
+    };
     public String getPassword() {
         return password;
     }
@@ -91,8 +99,9 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
+                "userRole"+role+
                 ", email='" + email + '\'' +
-                ", password='" + "[PROTECTED]" + '\'' + // Avoid printing the actual password
+                ", password='" + "[PROTECTED]" + '\'' +
                 ", resetPasswordToken='" + resetPasswordToken + '\'' +
                 ", isEmailVerified=" + isEmailVerified +
                 ", verificationToken='" + verificationToken + '\'' +

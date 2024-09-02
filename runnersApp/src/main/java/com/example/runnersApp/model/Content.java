@@ -30,11 +30,11 @@ public class Content {
     private String url;
 
 
-    public Content(Integer id, Integer userId, String title, String desc, Status status, Type contentType, LocalDateTime dateCreated, LocalDateTime dateUpdated, String url) {
+    public Content(Integer id, Integer userId, String title, String description, Status status, Type contentType, LocalDateTime dateCreated, LocalDateTime dateUpdated, String url) {
         this.id = id;
         this.userId = userId;
         this.title = title;
-        this.description = desc;
+        this.description = description;
         this.status = status;
         this.contentType = contentType;
         this.dateCreated = dateCreated;
@@ -71,11 +71,11 @@ public class Content {
         this.title = title;
     }
 
-    public String getDesc() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDesc(String desc) {
+    public void setDescription(String desc) {
         this.description = desc;
     }
 
@@ -124,7 +124,7 @@ public class Content {
                 "id=" + id +
                 ", userId=" + userId +
                 ", title='" + title + '\'' +
-                ", desc='" + description + '\'' +
+                ", description='" + description + '\'' +
                 ", status=" + status +
                 ", contentType=" + contentType +
                 ", dateCreated=" + dateCreated +

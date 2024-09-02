@@ -1,28 +1,48 @@
-###
-GET http://localhost:8080/api/content
+### Get all content
+GET http://localhost:8081/content
+Accept: application/json
 
-<> 2024-08-30T091545.200.json
-
-###
-GET http://localhost:8080/api/content
-Content-Type: application/json
-
-<> 2024-08-30T102648.200.json
-<> 2024-08-30T092931.200.json
-
-###
-POST http://localhost:8080/api/content
+### Create new content
+POST http://localhost:8081/content
 Content-Type: application/json
 
 {
-  "id": 2,
-  "title": "My Second Recipe",
-  "desc": "This is the 2nd recipe description",
+  "userId": 3,
+  "title": "My newly created Recipe",
+  "description": "This is the 2nd recipe description",
   "status": "IDEA",
   "contentType": "ARTICLE",
-  "dateCreated": "2024-08-30T11:24:19.4698425",
+  "dateCreated": "2024-08-30T11:24:19.469842",
   "dateUpdated": null,
   "url": ""
 }
 
-<> 2024-08-30T102617.200.json
+### Update content
+PUT http://localhost:8081/content/6
+Content-Type: application/json
+
+{
+  "title": "Updated Recipe",
+  "description": "Updated description",
+  "status": "PUBLISHED",
+  "contentType": "ARTICLE",
+  "dateCreated": "2024-08-30T11:24:19.4698425",
+  "dateUpdated": "2024-09-01T11:24:19.4698425",
+  "url": "updated-url"
+}
+
+### Delete content
+DELETE http://localhost:8081/content/6
+
+### Get content by user ID
+GET http://localhost:8081/content/user/2
+Accept: application/json
+
+### Get number of contents by status
+GET http://localhost:8081/content/count/status?status=IDEA
+Accept: application/json
+
+### Get number of contents by type by user
+GET http://localhost:8081/content/count/type?userId=2&type=ARTICLE
+Accept: application/json
+
