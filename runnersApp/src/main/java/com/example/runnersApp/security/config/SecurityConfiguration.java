@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -14,6 +13,11 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
+
+import static com.example.runnersApp.model.Permission.*;
+import static com.example.runnersApp.model.Role.ADMIN;
+import static com.example.runnersApp.model.Role.USER;
+import static org.springframework.http.HttpMethod.*;
 
 @Configuration
 @EnableWebSecurity
@@ -35,7 +39,22 @@ public class SecurityConfiguration {
                 .csrf(csrf->csrf.disable())
                 //Any requests to /auth/** are allowed without authentication.
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/auth/**")
+                        .permitAll()
+                        .requestMatchers("/content/**").hasAnyRole(ADMIN.name(),USER.name())
+
+                        .requestMatchers(GET,"/content/**").hasAnyAuthority(ADMIN_READ.name(),USER_READ.name())
+                        .requestMatchers(POST,"/content/**").hasAuthority(USER_CREATE.name())
+                        .requestMatchers(PUT,"/content/**").hasAuthority(USER_UPDATE.name())
+                        .requestMatchers(DELETE,"/content/**").hasAnyAuthority(ADMIN_DELETE.name(),USER_DELETE.name())
+
+                        .requestMatchers("/user/**").hasAnyRole(ADMIN.name(),USER.name())
+
+                        .requestMatchers(GET,"/user/**").hasAuthority(ADMIN_READ.name())
+                        .requestMatchers(POST,"/user/**").hasAuthority(USER_CREATE.name())
+                        .requestMatchers(PUT,"/user/**").hasAuthority(USER_UPDATE.name())
+                        .requestMatchers(DELETE,"/user/**").hasAnyAuthority(ADMIN_DELETE.name(),USER_DELETE.name())
+
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

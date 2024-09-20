@@ -3,6 +3,7 @@ package com.example.runnersApp.service.impl;
 import com.example.runnersApp.dto.LoginUserDto;
 import com.example.runnersApp.dto.RegisterUserDto;
 import com.example.runnersApp.dto.VerifyUserDto;
+import com.example.runnersApp.model.Role;
 import com.example.runnersApp.model.User;
 import com.example.runnersApp.repository.UserRepo;
 import jakarta.mail.MessagingException;
@@ -35,7 +36,7 @@ public class AuthenticationService {
     }
 
     public User signup(RegisterUserDto input) {
-        User user = new User(input.getUsername(), input.getEmail(), passwordEncoder.encode(input.getPassword()));
+        User user = new User(input.getUsername(), input.getEmail(), passwordEncoder.encode(input.getPassword()), Role.valueOf(input.getRole()));
         user.setVerificationCode(generateVerificationCode());
         user.setVerificationCodeExpiresAt(LocalDateTime.now().plusMinutes(15));
         user.setEnabled(false);//didn't verify email yet
