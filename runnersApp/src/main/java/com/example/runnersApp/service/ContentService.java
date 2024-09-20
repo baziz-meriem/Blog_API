@@ -16,4 +16,13 @@ public interface ContentService {
     List<Content> getContentByUser(Integer userId);
     long getNumberOfContentsByTypeByUser(Integer userId, Type type);
     long getNumberOfContentsByStatus(Status status);
+    List<Content> findByContentType(Type contentType);
+    long countByUserIdAndStatus(Integer userId, Status status);
+    long countByContentType(Type contentType);
+
+    List<Content> getAllContentByType(Type type);
+
+    long getNumberOfContentByUserByStatus(Integer userId, Status status);
+
+    long getNumberOfContentByType(Type type);
 }

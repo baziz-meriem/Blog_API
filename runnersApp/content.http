@@ -1,6 +1,7 @@
 ### Get all content
 GET http://localhost:8081/content
 Accept: application/json
+#Authorization: Bearer c2VjcmV0a2V5MTIzNDU2
 
 ### Create new content
 POST http://localhost:8081/content
@@ -46,3 +47,14 @@ Accept: application/json
 GET http://localhost:8081/content/count/type?userId=2&type=ARTICLE
 Accept: application/json
 
+### Get all content by type
+GET http://localhost:8081/content/type/ARTICLE
+Accept: application/json
+
+### Get number of content by user by status
+GET http://localhost:8081/content/user/2/status/IDEA
+Accept: application/json
+
+### Get number of content by type
+GET http://localhost:8081/content/count/type/ARTICLE
+Accept: application/json

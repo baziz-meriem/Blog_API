@@ -36,3 +36,44 @@ Content-Type: application/json
 
 ### Delete user
 DELETE http://localhost:8081/user/4
+
+
+
+
+###AUTH testing
+
+POST http://localhost:8081/auth/signup
+Content-Type: application/json
+
+{
+  "email": "jm_baziz@esi.dz",
+  "password": "password",
+  "username": "MeriemBaziz"
+}
+
+### Verify
+POST http://localhost:8081/auth/verify
+Content-Type: application/json
+
+{
+  "email": "jm_baziz@esi.dz",
+  "verificationCode": "453561"
+}
+
+### Resend verification code
+POST http://localhost:8081/auth/resend?email=jm_baziz@esi.dz
+Content-Type: application/x-www-form-urlencoded
+
+
+### Login
+POST http://localhost:8081/auth/login
+Content-Type: application/json
+
+{
+  "email": "jm_baziz@esi.dz",
+  "password": "password"
+}
+
+### Login
+POST http://localhost:8081/user/me
+Authorization: Bearer JWT-Tocken

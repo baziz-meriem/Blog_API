@@ -6,6 +6,8 @@ import com.example.runnersApp.model.Type;
 import com.example.runnersApp.model.User;
 import com.example.runnersApp.repository.ContentRepo;
 import com.example.runnersApp.repository.UserRepo;
+import io.github.cdimascio.dotenv.Dotenv;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -23,27 +25,9 @@ public class RunnersAppApplication {
 	private static final Logger log = LoggerFactory.getLogger(RunnersAppApplication.class);
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(RunnersAppApplication.class, args);
 	}
 
-//	@Bean
-//	CommandLineRunner commandLineRunner(UserRepo repository) {
-//		return args -> {
-//
-//				var user = new User(
-//						0,
-//						"jm_baziz@esi.dz",
-//						"ADMIN",
-//						"password",
-//						"resetPasswordToken",
-//						true,
-//						"verificationToken");
-//
-//				repository.save(user);
-//				log.info("User Created: " + user.toString());
-//			};
-//		};
 	}
 
 

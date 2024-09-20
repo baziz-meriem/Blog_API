@@ -23,4 +23,8 @@ public interface ContentRepo extends JpaRepository<Content, Integer> {
 
     // Get number of contents by status
     long countByStatus(Status status);
+    List<Content> findByContentType(Type contentType);
+    long countByUserIdAndStatus(Integer userId, Status status);
+    long countByContentType(Type contentType);
+
 }

@@ -1,54 +1,76 @@
 package com.example.runnersApp.model;
 
 import jakarta.persistence.*;
-import org.hibernate.validator.constraints.NotBlank;
-import jakarta.validation.constraints.Email;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+@EqualsAndHashCode
 
 @Entity
 @Table(name = "app_user")
-public class User {
+@Getter
+@Setter
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @NotBlank(message = "Role is mandatory")
-    private String role;
-
-    @NotBlank(message = "Email is mandatory")
-    @Email(message = "Email should be valid")
+    private Long id;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+    @Column(unique = true)
+    private String username;
+    @Column(nullable = false)
     private String email;
+    @Column(name = "verification_code")
+    private String verificationCode;
+    @Column(name = "verification_expiration")
+    private LocalDateTime verificationCodeExpiresAt;
 
-    @NotBlank(message = "Password is mandatory")
+    @Column(nullable = false)
     private String password;
 
-    private String resetPasswordToken;
-    private boolean isEmailVerified;
-    private String verificationToken;
+    @Column(nullable = true)
+    private boolean locked=false;
 
-    // Default constructor
+    @Column(nullable = true)
+    private boolean enabled=false;
+
     public User() {
+
     }
 
-    // Constructor with all fields
-    public User(Integer id, String email,String role, String password, String resetPasswordToken, boolean isEmailVerified, String verificationToken) {
-        this.id = id;
-        this.role = role;
+
+    public LocalDateTime getVerificationCodeExpiresAt(){
+      return verificationCodeExpiresAt;
+    }
+    public User(String username,String email, String password) {
+
+        this.username = username;
         this.email = email;
         this.password = password;
-        this.resetPasswordToken = resetPasswordToken;
-        this.isEmailVerified = isEmailVerified;
-        this.verificationToken = verificationToken;
+    }
+    public String getVerificationCode(){
+      return verificationCode;
     }
 
     // Getters and setters
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -59,39 +81,66 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getRole(){
+    public Role getRole(){
       return role;
     };
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+    public void setVerificationCodeExpiresAt(LocalDateTime verificationCodeExpiresAt) {
+        this.verificationCodeExpiresAt = verificationCodeExpiresAt;
+    }
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getResetPasswordToken() {
-        return resetPasswordToken;
+    public boolean isLocked() {
+        return locked;
     }
 
-    public void setResetPasswordToken(String resetPasswordToken) {
-        this.resetPasswordToken = resetPasswordToken;
-    }
 
-    public boolean isEmailVerified() {
-        return isEmailVerified;
+    public void setLocked(boolean locked) {
+        this.locked = locked;
     }
-
-    public void setEmailVerified(boolean emailVerified) {
-        isEmailVerified = emailVerified;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
-
-    public String getVerificationToken() {
-        return verificationToken;
-    }
-
-    public void setVerificationToken(String verificationToken) {
-        this.verificationToken = verificationToken;
+    public boolean getEnabled(){
+      return enabled;
     }
 
     // Override toString method
@@ -102,9 +151,8 @@ public class User {
                 "userRole"+role+
                 ", email='" + email + '\'' +
                 ", password='" + "[PROTECTED]" + '\'' +
-                ", resetPasswordToken='" + resetPasswordToken + '\'' +
-                ", isEmailVerified=" + isEmailVerified +
-                ", verificationToken='" + verificationToken + '\'' +
+                ", locked=" + locked +
+                ", enabled=" + enabled +
                 '}';
     }
 }

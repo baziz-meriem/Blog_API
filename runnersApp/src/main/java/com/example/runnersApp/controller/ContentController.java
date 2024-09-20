@@ -51,4 +51,5 @@ public class ContentController {
     public long getNumberOfContentsByStatus(@RequestParam String status) {
         return contentService.getNumberOfContentsByStatus(Status.valueOf(status.toUpperCase()));
     }
+
 }

@@ -30,8 +30,7 @@ public class Content {
     private String url;
 
 
-    public Content(Integer id, Integer userId, String title, String description, Status status, Type contentType, LocalDateTime dateCreated, LocalDateTime dateUpdated, String url) {
-        this.id = id;
+    public Content(Integer userId, String title, String description, Status status, Type contentType, LocalDateTime dateCreated, LocalDateTime dateUpdated, String url) {
         this.userId = userId;
         this.title = title;
         this.description = description;

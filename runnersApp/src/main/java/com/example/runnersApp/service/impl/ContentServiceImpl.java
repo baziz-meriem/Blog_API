@@ -53,4 +53,34 @@ public class ContentServiceImpl implements ContentService {
         return contentRepo.countByStatus(status);
     }
 
+    @Override
+    public List<Content> findByContentType(Type contentType) {
+        return List.of();
+    }
+
+    @Override
+    public long countByUserIdAndStatus(Integer userId, Status status) {
+        return 0;
+    }
+
+    @Override
+    public long countByContentType(Type contentType) {
+        return 0;
+    }
+
+    @Override
+    public List<Content> getAllContentByType(Type type) {
+        return contentRepo.findByContentType(Type.valueOf(type.name()));
+    }
+
+    @Override
+    public long getNumberOfContentByUserByStatus(Integer userId, Status status) {
+        return contentRepo.countByUserIdAndStatus(userId, Status.valueOf(status.name()));
+    }
+
+    @Override
+    public long getNumberOfContentByType(Type type) {
+        return contentRepo.countByContentType(Type.valueOf(type.name()));
+    }
+
 }
